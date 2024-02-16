@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table class="tableaux">
+        <thead>
+            <th><p>Theme</p></th>
+            <th><p>Lieu</p></th>
+            <th><p>Date</p></th>
+            <th><p>Distance à parcourir</p></th>
+            <th><p>Effectif</p></th>
+            <th><p>Liste de participants</p></th>
+            <th><p>Restaurer</p></th>
+        </thead>
+        {% for tuple in liste %}
+        <tr>
+            <td><p>{{tuple.theme}}</p></td>
+            <td><p>{{tuple.lieu}}</p></td>
+            <td><p>{{tuple.daterdv}}</p></td>
+            <td><p>{{tuple.nb_km}} km</p></td>
+            <td><p>{{tuple.effectif}} / {{tuple.effectif_max}}</p></td>
+            <td><p>
+                <a class="boutonDes" href="{{url_for('listePar', id_sortie=tuple.id_sortie)}}">Voir les inscrits</a>
+            </p></td>
+            <td><p>
+                <form method="POST" action="restauration">
+                <button name="restor" value="{{tuple.id_sortie}}" type="submit" class="boutonIns">Restaurer la sortie</button>       
+                </form>
+                
+            </p></td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

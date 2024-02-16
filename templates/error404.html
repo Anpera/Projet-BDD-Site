@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    <h1 class="titre">ERREUR 404 !!!!!!!!!!</h1>
+    <h2 class="soustitre"> Oh non ! Vous vous êtes perdus en forêt&nbsp;! :( <br>
+    Vite ! Revenez sur vos pas avant que la nuit ne tombe&nbsp;! D:</h2>
+    <img src = "{{ url_for('static', filename = 'lostbird.jpeg') }}" alt = "lostbird">
+
+</div>
+
+{% endblock %}

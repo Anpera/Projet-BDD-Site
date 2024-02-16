@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="profil-box" style="width: 75%;">
+    <div class="box-header">
+        <h2 class="soustitrelog">Ajout d'une espèce</h2>
+    </div>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p><span>{{ message }}</span></p><br>
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+    <form action="{{url_for('ajoutEspeces')}}" method="post">
+
+    <div class="boite3col">
+        <div class="col1">
+            <label for="carac">Caractéristiques&nbsp;:</label><br>
+        <select name="carac" data-placeholder="Choissisez des filtres" multiple class="chosen-select multiple-chosen">
+            {% for tuple in resultat %}
+            <option value="{{tuple.id_cara}}">{{tuple.partie}} {{tuple.descript}}</option>
+            {%endfor%}
+        </select>
+        </div>
+
+        <div class="col2">
+            <label for="typeesp">Type de l'espèce&nbsp;:</label><br>
+            <select name="typeesp" data-placeholder="Choissisez un type d'espèce" class="chosen-select multiple-chosen" required>
+                <option></option>
+                {% for tuple in type %}
+                <option value="{{tuple.typeesp}}">{{tuple.typeesp}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="col3">
+            <label for="espece">Nom de l'espèce&nbsp;:</label><br>
+            <input type="text-area" placeholder = "Loup" name="espece" required>
+            <br>
+        </div>
+
+    </div>
+    <input type="submit" class="boutonIns" value="Ajout d'une nouvelle espèce !">
+
+    </form>
+
+</div>
+
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Aucun tag trouvé... :/"
+    })
+</script>
+
+{% endblock %}

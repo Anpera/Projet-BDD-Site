@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST" action="inscripInSortie">
+    <input type="hidden" name="id_sortie" value="{{id_sortie}}">
+    <table class="tableaux">
+        <thead>
+            <th><p>Email</p></th>
+            <th><p>Prénom</p></th>
+            <th><p>Nom</p></th>
+            <th><p>Numéro</p></th>
+            <th><p>Ajouter en tant qu'animateur ?</p></th>
+        </thead>
+        {% for tuple in liste %}
+        <tr>
+            <td><p>{{tuple.email}}</p></td>
+            <td><p>{{tuple.prenom}}</p></td>
+            <td><p>{{tuple.nom}}</p></td>
+            <td><p>{{tuple.telephonep}}</p></td>
+            <td><p>
+                <button name="email" value="{{tuple.email}}" type="submit" class="boutonIns">Ajouter en tant qu'animateur</button>   
+            </p></td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>
+{% endblock %}

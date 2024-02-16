@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class = "container">
+
+    <div class="profil-box">
+        <div class="box-header">
+            <h2 class="soustitrelog">
+                {{profil.prenom}} {{profil.nom}}
+            </h2>
+        </div>
+        <div class="contenu">
+            <div class="infos">
+                <h2 class="titre">Informations personnelles&nbsp;:</h2>
+                <p>
+                    {% if specialisation != [None] %}
+                    <span>Spécialité&nbsp;:</span><br>
+                    
+                        {% for spe in specialisation %}
+                        {{spe}} <br>
+                        {% endfor %}
+                    <br>
+                    {% endif %}
+                    <span>Adresse-email&nbsp;:</span> {{profil.email}}
+                    <br>
+                    <span>Numéro de téléphone&nbsp;:</span> {{profil.telephonep}}
+                </p>                
+            </div>
+            <div class="activities">
+                <h2 class="titre">Activités&nbsp;</h2>
+                <p>
+                    <span>Nombre de sorties faites&nbsp;:</span> {{activites.nbsort}}
+                    <br>
+                    <span>Kilomètres parcourus&nbsp;:</span> {% if activites.totalkm %} {{activites.totalkm}} {% else %} 0 {%endif%}km
+                    <br>
+                    <br>
+                    <a class="bouton" href="{{url_for('historique')}}"><span>Historique de sorties</span></a>
+                </p>
+            </div>
+        </div>
+        <a class="boutonNope" href="{{url_for('deconnexion')}}">Se déconnecter</a>
+
+    </div>    
+</div>
+
+{% endblock %}

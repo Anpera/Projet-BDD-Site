@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="login-box animated fadeInUp">
+        <div class="box-header">
+            <h2 class="soustitrelog">Connexion</h2>
+        </div>
+
+        <form method="POST" action="{{url_for('connecting')}}">
+            <label for="adresse">Adresse-email&nbsp;:</label><br>
+            <input type="email" name="adresse"><br>
+        
+            <label for="mdp">Mot de passe&nbsp;:</label><br>
+            <input type="password" name="mdp"><br>
+            <button type="submit">Se connecter</button>
+        </form>
+        {%if erreur_connexion%}
+        <p> {{erreur_connexion}} </p>
+        {%endif%}
+
+
+    </div>
+
+</div>
+{% endblock %}

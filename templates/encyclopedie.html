@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profil-box" style="width: 75%;">
+  <div class="box-header">
+    <h2 class="soustitrelog">Choisir le mode de recherche :</h2>
+  </div>
+  <div class="contenu">
+    <div class="infos">
+      <a class="boutonIns" href = "{{url_for('recherche_via_caracteristique')}}">Recherche via caractéristiques</a>
+    </div>
+    <div class="activities">
+      <a class="boutonIns" href = "{{url_for('recherche_via_espece')}}">Recherche via nom de l'espèce</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

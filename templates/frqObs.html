@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="tableaux">
+    <thead>
+        <th><p>Id du nid</p></th>
+        <th><p>Latitude</p></th>
+        <th><p>Longitude</p></th>
+        <th><p>Type d'environnement</p></th>
+        <th><p>Fréquence d'observations</p></th>
+        <th><p>Période (mois/année)</p></th>
+    </thead>
+
+    {% for tuple in frequence %}
+    <tr>
+        <td><p>{{tuple.id_nid}}</p></td>
+        <td><p>{{tuple.coord_latitude}}</p></td>
+        <td><p>{{tuple.coord_longitude}}</p></td>
+        <td><p>{{tuple.type_environ}}</p></td>
+        <td><p>{{tuple.frequence}}</p></td>
+        <td><p>{{tuple.mois}}/{{tuple.annee}}</p></td>
+    </tr>
+    {%endfor%}
+
+
+</table>
+
+{% endblock %}

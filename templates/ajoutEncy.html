@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profil-box" style="width: 75%;">
+    <div class="box-header">
+        <h2 class="soustitrelog">Choisir quoi créer&nbsp;:</h2>
+    </div>
+    <div class="contenu">
+        <div class="infos">
+        <a class="boutonIns" href = "{{url_for('selecCaracteristiques')}}">Ajouter des caractéristiques</a>
+        </div>
+        <div class="activities">
+        <a class="boutonIns" href = "{{url_for('selecEspeces')}}">Ajouter des espèces</a>
+        </div>
+    </div>
+    </div>
+{% endblock %}

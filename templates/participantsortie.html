@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="{{url_for('noadhins')}}">
+    <h2 class="titre">
+        {% if not liste[0].archive %}
+        <button name="sortie" value="{{liste[0].id_sortie}}"type="submit" class="boutonIns">Ajouter quelqu'un d'extérieur à la sortie ?</button>
+        {%endif%}
+    </h2>
+</form>
+
+<form method="POST" action="{{url_for('passageAnim')}}">
+    {% if liste[0] %}
+    <input type="hidden" name="sortieid" value="{{liste[0].id_sortie}}">
+    {%endif%}
+    <table class="tableaux">
+        <thead>
+            <th><p>Email</p></th>
+            <th><p>Prénom</p></th>
+            <th><p>Nom</p></th>
+            <th><p>Spécialisation</p></th>
+            <th><p>Adhérent</p></th>
+            <th><p>Animateur</p></th>
+            {% if not liste[0].archive %}
+            <th><p>Supprimer</p></th>
+            {% endif %}
+        </thead>
+        {% for tuple in liste %}
+        <tr>
+            <td><p>{{tuple.email}}</p></td>
+            <td><p>{{tuple.prenom}}</p></td>
+            <td><p>{{tuple.nom}}</p></td>
+            <td>
+                {% for spec in listespe %}
+                {% if spec.email == tuple.email%}
+                <p>{{spec.spe}}</p>
+                {% else %}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td><p>{% if tuple.adherent %} &#x2714; {% else %} &#x2718; {% endif %}</p></td>
+            <td>
+                {% if liste[0].archive %}
+                    {% if tuple.adherent %}
+                    <p>
+                        {% if tuple.animateur %}
+                        <p class="boutonIns">Animateur</button>
+                        {%else%}
+                        <p class="boutonNope">Participant</button>
+                        {%endif%}
+                    </p>
+                    {%else%}
+                    <p class = "boutonDes">Animateur.trice fixé.e</p>
+                    {%endif%}
+
+                {% else %}
+                    {% if tuple.adherent %}
+                    <p>
+                        {% if tuple.animateur %}
+                        <button name="email" value="{{tuple.email}}" type="submit" class="boutonIns">Retirer</button>
+                        {%else%}
+                        <button name="email" value="{{tuple.email}}" type="submit" class="boutonNope">Ajouter</button>
+                        {%endif%}
+                    </p>
+                    {%else%}
+                    <p class = "boutonDes">Animateur fixe</p>
+                    {%endif%}
+                {%endif%}
+            </td>
+
+            
+            {% if not liste[0].archive %}
+            <td><p><button name="suppression" value="{{tuple.email}}" type="submit" class="boutonNope">&#x2718;</button></p></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>
+{% endblock %}

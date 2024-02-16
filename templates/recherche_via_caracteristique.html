@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="profil-box" style="width: 75%;">
+  <div class="box-header">
+    <h2 class="soustitrelog">Recherche via les caractéristiques :</h2>
+  </div>
+  <form method="get" action="recherche_via_caracteristique">
+
+  <div class="boite3col">
+    <div class="col1">
+      <label for="Espèce">Type de l'espèce :</label><br>
+      <select name="type_esp" id="type_esp">
+        {% for t in type %}
+        <option value="{{t.typeesp}}">{{t.typeesp}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="col2">
+      <label for="carac">Caractéristiques&nbsp;:</label><br>
+        <select name="carac" data-placeholder="Choissisez des filtres" multiple class="chosen-select multiple-chosen">
+            {% for tuple in partie_desc %}
+            <option value="{{tuple.id_cara}}">{{tuple.partie}} {{tuple.descript}}</option>
+            {%endfor%}
+        </select>
+      <br>
+    </div>
+
+    <div class="col3">
+      <h3 class="titre">Résultat de la recherche :</h3>
+      {% if resultat %}
+        {% for espece in esp %}
+        <p><span>{{espece.nomesp}}</span></p>
+        {% for tuple in resultat%}
+          {% if tuple.nomesp == espece.nomesp%}
+            <p> {{tuple.partie}} {{tuple.descript}}</p>
+          {% endif %}
+        {%endfor%}
+        {%endfor%}
+
+      {%else%}
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p><span>{{ message }}</span></p><br>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {%endif%}
+    </div>
+  </div>
+  <input type="submit" class="boutonIns" value="Valider"></input>
+  </form>
+</div>
+
+<script>
+  $(".chosen-select").chosen({
+      no_results_text: "Aucun tag trouvé... :/"
+  })
+</script>
+{% endblock %}

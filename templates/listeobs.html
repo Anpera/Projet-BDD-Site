@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="tableaux">
+    <thead>
+        <th><p>Nom de l'oiseau</p></th>
+        <th><p>Nombre occupants du lieu</p></th>
+        <th><p>Nombre oeufs</p></th>
+        <th><p>Date de l'observation</p></th>
+        <th><p>Latitude du nid</p></th>
+        <th><p>Longitude du nid</p></th>
+        <th><p>Hauteur du nid</p></th>
+        <th><p>Support</p></th>
+        <th><p>Environnement</p></th>
+    </thead>
+    {% for tuple in espece %}
+    <tr>
+        <td><p>{{tuple.nomesp}}</p></td>
+        <td><p>{{tuple.nbreoccupants}}</p></td>
+        <td><p>{{tuple.nbreoeufs}}</p></td>
+        <td><p>{{tuple.nid}}</p></td>
+        <td><p>{{tuple.lat}}</p></td>
+        <td><p>{{tuple.long}}</p></td>
+        <td><p>{{tuple.ht}}</p></td>
+        <td><p>{{tuple.support}}</p></td>
+        <td><p>{{tuple.envir}}</p></td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

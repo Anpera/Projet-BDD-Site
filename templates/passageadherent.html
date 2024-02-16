@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profil-box seventyFive">
+    <div class="box-header">
+        <h2 class="soustitrelog">
+            Passage en tant qu'Adhérent
+        </h2>
+    </div>
+    <form method="POST" action="{{url_for('ajoutAdherent')}}">
+    <div class="contenu">
+        <div class="infos">
+            <h2 class="soustitre">Adresse e-mail&nbsp;: {{personne.email}}</h2><br>
+        
+            <h2 class="soustitre">Prénom&nbsp;: {{personne.prenom}}</h2><br>
+        
+            <h2 class="soustitre">Nom&nbsp;: {{personne.nom}}</h2><br>
+
+            <h2 class="soustitre">Téléphone&nbsp;: {{personne.telephonep}}</h2><br>
+        </div>
+        <div class="activities">
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p><span>{{ message }}</span></p><br>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        
+            <label for="statut">Statut de l'adhérent</label><br>
+            <select name="statut" id="statut">
+                <option value="None">--Veuillez choisir un statut--</option>
+                {% for tuple in listeStatut%}
+                <option value="{{tuple.idstatut}}">{{tuple.idstatut}} -- {{tuple.montant}}€</option>
+                {% endfor %}
+            </select><br><br>
+            <p>Moyen de paiment&nbsp;<br></p>
+            <label for="CB">Carte Bancaire</label>
+            <input type="radio" name="moyen" id="CB" value="CB">
+            <label for="cheque">Chèque</label>
+            <input type="radio" name="moyen" id="cheque" value="cheque">
+            <label for="espece">Espèces</label>
+            <input type="radio" name="moyen" id="espece" value="espece"><br>
+        
+            <label for="spe">Spécialisation de l'adhérent</label><br>
+            <select name="spe" id="spe" multiple class="multiple" size = {{specialite|length +1}}>
+                <option value="None">Spécialité vide</option>
+                {% for tuple in specialite %}
+                <option value="{{tuple.spe}}">{{tuple.spe}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+    </div>
+    <button name="email" value="{{personne.email}}" type="submit" class="boutonIns">Passage à Adhérent</button>  
+    </form>
+
+</div>
+
+{% endblock %}

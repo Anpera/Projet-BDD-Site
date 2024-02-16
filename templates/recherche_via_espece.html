@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="profil-box" style="width: 75%;">
+    <div class="box-header">
+        <h2 class="soustitrelog">Recherche par le nom de l'espèce :</h2>
+    </div>
+    <form method="GET" action="recherche_via_espece">
+    <div class="contenu">
+        <div class="infos">
+            <p><label for="espece">Nom espèce&nbsp;:</label></p>
+
+            <select name="espece" data-placeholder="Choissisez une espèce" class="chosen-select">
+                {% for tuple in lstespeces %}
+                <option value="{{tuple.nomesp}}">{{tuple.nomesp}}</option>
+                {%endfor%}
+            </select>
+            <br><br>
+            <input type="submit" class="boutonIns" value="Valider"></input>
+        </div>
+        <div class="activities">
+            {% if res %}
+                <p><span>{{res[0].typeesp}}</span></p>
+                <p><span>{{res[0].nomesp}}</span></p><br>
+                
+                {% for tuple in res %}
+                    <p>- {{tuple.partie}} {{tuple.descript}}</p>
+                {%endfor%}
+            {%endif%}
+        </div>
+    </div>
+    </form>
+</div>
+
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Aucun tag trouvé... :/"
+    })
+</script>
+{% endblock %}

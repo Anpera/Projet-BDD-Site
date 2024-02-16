@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    <h1 class="titre">ERREUR 405 !! >:( </h1>
+    <h2 class="soustitre"> Dis donc, ne serait-ce pas un vaguabond sur des terres interdites ? <br>
+    Vous avez tenter d'aller sur la page de résultat d'un formulaire sans passer par le formulaire ! <br>
+    Revenez sur vos pas !! >:(</h2>
+    <img src = "{{ url_for('static', filename = 'oiseauchantier.jpeg') }}" alt = "lostbird">
+
+</div>
+
+{% endblock %}

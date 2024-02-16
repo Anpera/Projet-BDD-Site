@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if 'adherent' not in session and 'profil' in session and 'admin' not in session %}
+<h1 class="titre">Vous n'êtes pas adhérent. Vous ne pouvez pas vous inscrire à une activité.</h1>
+<h2 class="soustitre">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter l'administration.</h2>
+{% endif %}
+
+<form method="POST" action="inscriptionsortie">
+    <table class="tableaux">
+        <thead>
+            <th><p>Thème</p></th>
+            <th><p>Lieu</p></th>
+            <th><p>Date</p></th>
+            <th><p>Distance à parcourir</p></th>
+            <th><p>Effectif maximum</p></th>
+            <th><p>Nombre d'inscrits</p></th>
+            {% if 'profil' in session and 'adherent' in session and 'admin' not in session %}<th><p>S'inscrire</p></th> {% endif %}
+        </thead>
+        {% for tuple in resultat %}
+        <tr>
+            <td><p>{{tuple.theme}}</p></td>
+            <td><p>{{tuple.lieu}}</p></td>
+            <td><p>{{tuple.daterdv}}</p></td>
+            <td><p>{{tuple.nb_km}} km</p></td>
+            <td><p>{{tuple.effectif_max}}</p></td>
+            <td><p>{{tuple.effectif}}</p></td>
+            {% if 'profil' in session and 'adherent' in session and 'admin' not in session %}
+                <td> <p>
+                    {% if tuple.idp %}
+                    <button name="inscription" value="{{tuple.id_sortie}}" type="submit" class="boutonNope">Se désinscrire</button>
+                    {% elif tuple.effectif_max <= tuple.effectif %}
+                    Il n'y a plus de places disponibles.
+                    {% else %}
+                    <button name="inscription" value="{{tuple.id_sortie}}" type="submit" class="boutonIns">S'inscrire</button>                 
+                    {% endif %}
+                </p></td> 
+    
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+</form>
+
+{% endblock %}

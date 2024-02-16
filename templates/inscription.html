@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profil-box seventyFive">
+    <div class="box-header">
+        <h2 class="soustitrelog">
+            Inscription d'un nouveau membre
+        </h2>
+    </div>
+    <form method="POST" action="{{url_for('ajoutInscrit')}}">
+    <div class="contenu">
+        <div class="infos">
+            <label for="adresse">Addresse-email&nbsp;:</label><br>
+            <input type="email" name="adresse" placeholder="john.smith@gmail.com"><br>
+        
+            <label for="prenom">Prénom&nbsp;:</label><br>
+            <input type="text-area" name="prenom" placeholder="John" required><br>
+        
+            <label for="nom">Nom&nbsp;</label><br>
+            <input type="text-area" name="nom" placeholder="Smith" required><br>
+
+            <label for="telephone">N° de téléphone&nbsp;:</label><br>
+            <input type="text-area" name="telephone" placeholder="0123456789" required><br>
+        </div>
+        <div class="activities">
+            <p>Adhérent ? &nbsp;<br></p>
+            <label for="Oui">Oui</label>
+            <input type="radio" name="adhe" id="Oui" value="Oui">
+            <label for="Oui">Non</label>
+            <input type="radio" name="adhe" id="Non" value="Non" checked>
+            <hr>
+            <h2 class='soustitre'>À ignorer s'il ne s'agit pas d'un adhérent&nbsp;:</h2>
+            <br>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p><span>{{ message }}</span></p><br>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        
+            <label for="statut">Statut de l'adhérent</label><br>
+            <select name="statut" id="statut">
+                <option value="None">--Veuillez choisir un statut--</option>
+                {% for tuple in listeStatut%}
+                <option value="{{tuple.idstatut}}">{{tuple.idstatut}} -- {{tuple.montant}}€</option>
+                {% endfor %}
+            </select><br><br>
+            <p>Moyen de paiment&nbsp;<br></p>
+            <label for="CB">Carte Bancaire</label>
+            <input type="radio" name="moyen" id="CB" value="CB">
+            <label for="cheque">Chèque</label>
+            <input type="radio" name="moyen" id="cheque" value="cheque">
+            <label for="espece">Espèces</label>
+            <input type="radio" name="moyen" id="espece" value="espece"><br>
+        
+            <label for="statut">Spécialisation de l'adhérent</label><br>
+            <select name="spe" id="spe" multiple class="multiple" size = {{specialite|length +1}}>
+                <option value="None">Spécialité vide</option>
+                {% for tuple in specialite %}
+                <option value="{{tuple.spe}}">{{tuple.spe}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+    </div>
+    <input type="submit" class="boutonIns" value="Incrire">
+    </form>
+
+</div>
+
+{% endblock %}

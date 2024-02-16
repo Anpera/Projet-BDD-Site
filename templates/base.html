@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block head %} {% endblock %}
+	<link rel="icon" href="{{ url_for('static', filename = 'logo.png') }}">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'animate.css') }}"> 
+	<title>Nature et marche à pieds</title>
+</head>
+<body>
+	<header style="text-align:center">
+		<img src = "{{ url_for('static', filename = 'logo.png') }}" alt = "logo" width = "200">
+		<h1 class="titre"> Association de sortie en pleine nature </h1>
+	</header>
+	<ul class="navbar">
+		<li class="navbar"><a class="navbar {%if accueil%} active {%endif%}" href="{{url_for('accueil')}}">Accueil</a></li>
+		<li class="navbar"><a class="navbar {%if sortie%} active {%endif%}" href="{{url_for('sorties')}}">Sorties</a></li>
+		<li class="navbar"><a class="navbar {%if encyclopedie%} active {%endif%}" href="{{url_for('encyclopedie')}}">Encyclopédie</a></li>
+		{% if 'profil' in session%}
+		<li class="navbar"><a class="navbar {%if observation%} active {%endif%}" href="{{url_for('observation')}}">Observations</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if connexion%} active {%endif%}" href="{{url_for('profil')}}">Profil</a></li>
+		{% else %}
+		<li style="float:right" class="navbar"><a class="navbar {%if connexion%} active {%endif%}" href="{{url_for('connexion')}}">Connexion</a></li>
+		{% endif %}
+		{% if session['profil'] == 'jean-paul.smith@gmail.com' %}
+		<li style="float:right" class="navbar"><a class="navbar {%if frequenceEsp%} active {%endif%}" href="{{url_for('freqEsp')}}">Espèces les plus observées</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if frequenceObs%} active {%endif%}" href="{{url_for('freqObs')}}">Fréquence d'obersavtions des nichoirs</a></li>
+		{% endif %}
+		{% if 'admin' in session %}
+		<li style="float:right" class="navbar"><a class="navbar {%if inscription%} active {%endif%}" href="{{url_for('inscriptionP')}}">Inscription</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if adhe%} active {%endif%}" href="{{url_for('listeAdherent')}}">Liste des adhérents</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if listeins%} active {%endif%}" href="{{url_for('listeInscrit')}}">Liste des inscrits</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if creasortie%} active {%endif%}" href="{{url_for('creasortie')}}">Création de sorties</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if listesorties%} active {%endif%}" href="{{url_for('sortieadmin')}}">Listes sorties</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if archivage%} active {%endif%}" href="{{url_for('archive')}}">Sorties archivées</a></li>
+		<li style="float:right" class="navbar"><a class="navbar {%if ajoutEncyclo%} active {%endif%}" href="{{url_for('ajoutEncy')}}">Ajout encyclopédie</a></li>
+		{% endif %}
+	</ul>
+
+<div class="contenubase">
+	{% block content %} {% endblock %}
+</div>  
+
+</body>
+</html>

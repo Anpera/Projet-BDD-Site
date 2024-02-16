@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST" action="passageAdherent">
+    <table class="tableaux">
+        <thead>
+            <th><p>Email</p></th>
+            <th><p>Prénom</p></th>
+            <th><p>Nom</p></th>
+            <th><p>Téléphone P.</p></th>
+            <th><p>Modifier ?</p></th>
+        </thead>
+        {% for tuple in liste %}
+        {% if tuple.email != 'administrateur.niture@gmail.com' %}
+        <tr>
+            <td><p>{{tuple.email}}</p></td>
+            <td><p>{{tuple.prenom}}</p></td>
+            <td><p>{{tuple.nom}}</p></td>
+            <td><p>{{tuple.telephonep}}</p></td>
+            <td><p>
+                <button name="email" value="{{tuple.email}}" type="submit" class="boutonIns">Passer adhérent</button>   
+            </p></td>
+
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+    </table>
+</form>
+{% endblock %}

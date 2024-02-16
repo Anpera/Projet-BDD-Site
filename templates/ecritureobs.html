@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="profil-box">
+    <div class="box-header">
+        <h2 class="soustitrelog">
+            Ajout d'une observation
+        </h2>
+    </div>
+    <form method="POST" action="{{url_for('ajoutobs')}}">
+    <div class="contenu">
+        <div class="infos">
+            <label for="esp">Nom oiseaux&nbsp;:</label><br>
+            <select name="esp" data-placeholder="Choissisez une espèce" class="chosen-select">
+                {% for tuple in lst_esp %}
+                <option value="{{tuple.nomesp}}">{{tuple.nomesp}}</option>
+                {%endfor%}
+            </select>
+            <br><br>
+            <label for="dateobs">Date de la sortie&nbsp;:</label><br>
+            <input type="date" name="dateobs" max = "{{today}}" value = "{{today}}"placeholder="2017" required><br>
+
+            <label for="nb_occu">Nombre d'occupants&nbsp;:</label><br>
+            <input type="text-area" name="nb_occu" placeholder="4" required><br>
+
+            <label for="nb_oeufs">Nombre d'oeufs</label><br>
+            <input type="text-area" name="nb_oeufs" placeholder="0" required><br>
+        </div>
+        <div class="activities">
+            <p>Position du lieu de vie de l'animal</p><br>
+            <label for="lat">Latitude du nid</label><br>
+            <input type="text-area" name="lat" placeholder="48.701569" required><br>
+
+            <label for="long">Longitude du nid</label><br>
+            <input type="text-area" name="long" placeholder="2.43909" required><br>
+
+            <label for="hauteur">Hauteur du nid en mètres</label><br>
+            <input type="text-area" name="hauteur" placeholder="30" required><br>
+
+            <label for="support">Support</label><br>
+            <input type="text-area" name="support" placeholder="Bois" required><br>
+
+            <label for="environ">Type d'environnement</label><br>
+            <input type="text-area" name="environnement" placeholder="Forêt" required><br>
+        </div>
+    </div>
+    <input type="submit" class="boutonIns" value="Ajouter">
+    </form>
+
+</div>
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Aucun tag trouvé... :/"
+    })
+</script>
+{% endblock %}

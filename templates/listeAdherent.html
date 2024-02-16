@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST" action="passageAdherent">
+    <table class="tableaux">
+        <thead>
+            <th><p>Email</p></th>
+            <th><p>Prénom</p></th>
+            <th><p>Nom</p></th>
+            <th><p>Téléphone P.</p></th>
+            <th><p>Spécialisation</p></th>
+            <th><p>Statut</p></th>
+            <th><p>Moyen de Paiement</p></th>
+            <th><p>Date d'inscription</p></th>
+        </thead>
+        {% for tuple in listadhe %}
+        {% if tuple.email != 'administrateur.niture@gmail.com' %}
+        <tr>
+            <td><p>{{tuple.email}}</p></td>
+            <td><p>{{tuple.prenom}}</p></td>
+            <td><p>{{tuple.nom}}</p></td>
+            <td><p>{{tuple.telephonep}}</p></td>
+            <td>
+                {% for spec in listespe %}
+                {% if spec.email == tuple.email%}
+                <p>{{spec.spe}}</p>
+                {% else %}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td><p>{{tuple.idstatut}}</p></td>
+            <td><p>{{tuple.moyenpaiement}}</p></td>
+            <td><p>{{tuple.datepaiement}}</p></td>
+
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+    </table>
+</form>
+{% endblock %}
