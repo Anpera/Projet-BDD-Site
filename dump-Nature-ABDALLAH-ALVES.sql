@@ -2,6 +2,9 @@ DROP VIEW IF EXISTS frequenceesp, frequenceobs CASCADE;
 DROP TABLE adherent, cara_espece, caracteristiques, espece, espece_observe, inscrit, nichoir, observation, ob
 servation_adherent, personne, sortie, specialisation, specialite, statut CASCADE;
 
+-- mdp de chaque compte : le prénom en minuscule
+-- sauf pour admin : adminniture
+
 CREATE TABLE personne(
     email varchar(40) PRIMARY KEY,
     prenom varchar(25) NOT NULL,
