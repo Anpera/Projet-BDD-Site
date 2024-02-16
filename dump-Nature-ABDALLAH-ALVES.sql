@@ -1,3 +1,7 @@
+DROP VIEW IF EXISTS frequenceesp, frequenceobs CASCADE;
+DROP TABLE adherent, cara_espece, caracteristiques, espece, espece_observe, inscrit, nichoir, observation, ob
+servation_adherent, personne, sortie, specialisation, specialite, statut CASCADE;
+
 CREATE TABLE personne(
     email varchar(40) PRIMARY KEY,
     prenom varchar(25) NOT NULL,
@@ -183,9 +187,9 @@ tillyboulanger@rhyta.com,ornithologie
 \.
 
 COPY sortie(theme, lieu, daterdv, nb_km, effectif_max) FROM STDIN csv;
-Les rapaces,Le Parc aux Rapaces de Madiran,2022-11-29,5.4,50
+Les rapaces,Le Parc aux Rapaces de Madiran,2024-11-29,5.4,50
 Plantes et insectes du milieu aquatiques,L'Aquarium marin de Tregastel,2019-07-14,7.9,35
-Comment installer un nichoir,Parc Naturel régional de l'Aubrac,2023-08-07,10.5,20
+Comment installer un nichoir,Parc Naturel régional de l'Aubrac,2024-08-07,10.5,20
 \.
 
 COPY inscrit FROM STDIN csv;
